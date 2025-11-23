@@ -19,6 +19,31 @@
             <%= order_status_badge(@order.status) %>
           </div>
         </div>
+
+        
+        <div class="alert alert-<%= @order.pending? ? 'warning' : 'success' %> mt-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <i class="bi bi-<%= @order.pending? ? 'clock' : 'check-circle' %> me-2"></i>
+      <strong>Order Status:</strong> <%= @order.status.titleize %>
+      <% if @order.pending? %>
+        <br><small>Your order is awaiting payment.</small>
+      <% elsif @order.paid? %>
+        <br><small>Payment received. Your order will be shipped soon.</small>
+      <% elsif @order.shipped? %>
+        <br><small>Your order has been shipped!</small>
+      <% end %>
+    </div>
+    
+    <%# Feature 3.3.1 - Payment button (only displayed for pending orders）%>
+    <% if @order.pending? %>
+      <%= link_to new_payment_path(order_id: @order.id), class: "btn btn-success" do %>
+        <i class="bi bi-credit-card me-1"></i> Pay Now
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
         <div class="card-body">
           <!-- Order Items -->
           <h6 class="text-muted mb-3">Items Ordered</h6>
@@ -115,6 +140,12 @@
               <span>Order Date:</span>
               <span><%= @order.created_at.strftime("%b %d, %Y at %l:%M %p") %></span>
             </div>
+            <% if @order.payment_at.present? %>
+  <div class="d-flex justify-content-between mb-1">
+    <span>Payment Date:</span>
+    <span><%= @order.payment_at.strftime("%b %d, %Y at %l:%M %p") %></span>
+  </div>
+<% end %>
             <% if @order.shipped_at.present? %>
               <div class="d-flex justify-content-between mb-1">
                 <span>Shipped:</span>

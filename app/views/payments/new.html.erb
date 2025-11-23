@@ -1,0 +1,101 @@
+<%# Feature 3.3.1 -Payment page %>
+
+<% content_for :title, "Pay for Order ##{@order.id.to_s.rjust(6, '0')}" %>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card border-0 shadow">
+        <div class="card-header bg-success text-white py-3">
+          <h4 class="mb-0">
+            <i class="bi bi-credit-card me-2"></i>Complete Payment
+          </h4>
+        </div>
+        <div class="card-body p-4">
+          <!-- Order Info -->
+          <div class="mb-4">
+            <p class="text-muted mb-1">Order Number</p>
+            <h5>#<%= @order.id.to_s.rjust(6, '0') %></h5>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="bg-light rounded p-3 mb-4">
+            <div class="d-flex justify-content-between mb-2">
+              <span>Subtotal</span>
+              <span><%= number_to_currency(@order.subtotal) %></span>
+            </div>
+            
+            <% if @order.gst_amount > 0 %>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span class="text-muted">GST</span>
+                <span><%= number_to_currency(@order.gst_amount) %></span>
+              </div>
+            <% end %>
+            
+            <% if @order.pst_amount > 0 %>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span class="text-muted">PST</span>
+                <span><%= number_to_currency(@order.pst_amount) %></span>
+              </div>
+            <% end %>
+            
+            <% if @order.hst_amount > 0 %>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span class="text-muted">HST</span>
+                <span><%= number_to_currency(@order.hst_amount) %></span>
+              </div>
+            <% end %>
+            
+            <hr class="my-2">
+            
+            <div class="d-flex justify-content-between">
+              <strong>Total</strong>
+              <strong class="text-success fs-5"><%= number_to_currency(@order.grand_total) %></strong>
+            </div>
+          </div>
+
+          <!-- Pay Button -->
+          <%= form_with url: payments_path(order_id: @order.id), method: :post, local: true do %>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success btn-lg">
+                <i class="bi bi-lock-fill me-2"></i>
+                Pay <%= number_to_currency(@order.grand_total) %> with Stripe
+              </button>
+            </div>
+          <% end %>
+
+          <!-- Secure Payment Note -->
+          <div class="text-center mt-4">
+            <p class="text-muted small mb-2">
+              <i class="bi bi-shield-check me-1"></i>
+              Secure payment powered by Stripe
+            </p>
+            <div class="d-flex justify-content-center gap-2">
+              <i class="bi bi-credit-card-2-front fs-4 text-muted"></i>
+              <i class="bi bi-credit-card fs-4 text-muted"></i>
+            </div>
+          </div>
+
+          <!-- Test Card Info (Development Only) -->
+          <% if Rails.env.development? %>
+            <div class="alert alert-info mt-4 small">
+              <strong>Test Mode:</strong> Use these test cards:
+              <ul class="mb-0 mt-2">
+                <li>Success: <code>4242 4242 4242 4242</code></li>
+                <li>Decline: <code>4000 0000 0000 0002</code></li>
+                <li>Any future date, any CVC, any postal code</li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Back Link -->
+      <div class="text-center mt-3">
+        <%= link_to customers_order_path(@order), class: "text-muted" do %>
+          <i class="bi bi-arrow-left me-1"></i> Back to Order Details
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,3 +33,7 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+# .env files
+.env
+.env.local
+.env.*.local

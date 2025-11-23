@@ -84,6 +84,7 @@ ActiveAdmin.register Order do
       attributes_table_for order do
         row :stripe_payment_id
         row :shipped_at
+        row :payment_at
         row :delivered_at
         row :created_at
       end

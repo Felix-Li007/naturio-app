@@ -51,6 +51,16 @@ Rails.application.routes.draw do
   end
 
   # ============================================
+  # Payments (Feature 3.3.1)
+  # ============================================
+  resources :payments, only: [:new, :create] do
+    collection do
+      get 'success', to: 'payments#success'
+      get 'cancel', to: 'payments#cancel'
+    end
+  end
+
+  # ============================================
   # Payments Webhook
   # ============================================
   post '/webhooks/stripe', to: 'webhooks#stripe'
