@@ -67,6 +67,17 @@ services:
     volumes:
       - sonar-db:/var/lib/postgresql
 
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    container_name: stripe-cli
+    networks:
+      - rails_network
+    command: ["listen", "--forward-to", "http://web-app:3000/webhooks/stripe"]
+    environment:
+      - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
+    stdin_open: true
+    tty: true
+
 volumes:
   sonar-db:
 
