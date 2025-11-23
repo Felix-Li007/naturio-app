@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_21_205045) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_23_060455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -123,15 +123,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_21_205045) do
     t.decimal "grand_total", precision: 10, scale: 2, default: "0.0"
     t.decimal "gst_amount", precision: 10, scale: 2, default: "0.0"
     t.decimal "hst_amount", precision: 10, scale: 2, default: "0.0"
+    t.datetime "payment_at"
     t.decimal "pst_amount", precision: 10, scale: 2, default: "0.0"
     t.datetime "shipped_at"
     t.string "status", limit: 20, default: "pending"
+    t.string "stripe_checkout_id"
     t.string "stripe_payment_id", limit: 255
     t.decimal "subtotal", precision: 10, scale: 2, default: "0.0"
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["status"], name: "index_orders_on_status"
+    t.index ["stripe_checkout_id"], name: "index_orders_on_stripe_checkout_id"
     t.index ["stripe_payment_id"], name: "index_orders_on_stripe_payment_id"
   end
 
