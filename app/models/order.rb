@@ -31,10 +31,9 @@ class Order < ApplicationRecord
     status == 'shipped'
   end
 
-  # Stripe 相关方法
 def stripe_checkout_url
   return nil unless stripe_checkout_id.present?
-  # 用于重新支付
+  # for repayment
 end
 
 

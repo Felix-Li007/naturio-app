@@ -1,9 +1,8 @@
-# app/controllers/webhooks_controller.rb
-# Feature 3.3.1 - Stripe Webhook 处理
-# Feature 3.2.2 - 订单状态自动更新
+# Feature 3.3.1 -Stripe Webhook processing
+# Feature 3.2.2 -Order status automatically updated
 
 class WebhooksController < ApplicationController
-  # 跳过 CSRF 验证（Webhook 来自外部）
+  # Skip CSRF validation (webhook from external)
   skip_before_action :verify_authenticity_token
 
   # POST /webhooks/stripe
@@ -26,7 +25,7 @@ class WebhooksController < ApplicationController
       return
     end
 
-    # 处理不同的事件类型
+    # Handle different event types
     case event.type
     when 'checkout.session.completed'
       handle_checkout_session_completed(event.data.object)
@@ -43,7 +42,7 @@ class WebhooksController < ApplicationController
 
   private
 
-  # 处理 Checkout Session 完成
+# Process Checkout Session completed
   def handle_checkout_session_completed(session)
     order_id = session.metadata&.order_id
     return unless order_id
@@ -54,48 +53,47 @@ class WebhooksController < ApplicationController
     Rails.logger.info "Processing checkout.session.completed for Order ##{order.id}"
 
     if session.payment_status == 'paid' && order.pending?
-      # 更新订单状态 (Feature 3.2.2)
+      # Update order status (Feature 3.2.2)
       order.mark_as_paid!(session.payment_intent, session.id)
       
-      # 创建 Payment 记录
+     #Create Payment record
       create_payment_from_session(order, session)
       
       Rails.logger.info "Order ##{order.id} marked as paid"
     end
   end
 
-  # 处理 Payment Intent 成功
+  # Process Payment Intent successfully
   def handle_payment_intent_succeeded(payment_intent)
     Rails.logger.info "Payment Intent succeeded: #{payment_intent.id}"
     
-    # 查找关联的订单（通过 Payment 或 metadata）
+    # Find associated orders (via Payment or metadata)
     payment = Payment.find_by(stripe_payment_id: payment_intent.id)
     return unless payment
 
     payment.update!(status: 'completed')
   end
 
-  # 处理支付失败
+ # Processing payment failed
   def handle_payment_failed(payment_intent)
     Rails.logger.error "Payment failed: #{payment_intent.id}"
     
-    # 可以在这里发送通知邮件等
+   # You can send notification emails, etc. here
     order_id = payment_intent.metadata&.order_id
     return unless order_id
 
     order = Order.find_by(id: order_id)
     return unless order
 
-    # 记录失败信息（可选）
     Rails.logger.error "Payment failed for Order ##{order.id}"
   end
 
-  # 从 Session 创建 Payment 记录
+  #Create Payment record from Session
   def create_payment_from_session(order, session)
     return if order.payment.present?
 
     begin
-      # 获取 Payment Method 详情
+     # Get Payment Method details
       payment_intent = Stripe::PaymentIntent.retrieve(session.payment_intent)
       payment_method = Stripe::PaymentMethod.retrieve(payment_intent.payment_method)
 

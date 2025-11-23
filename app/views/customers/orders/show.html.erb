@@ -35,7 +35,7 @@
       <% end %>
     </div>
     
-    <%# Feature 3.3.1 - 支付按钮（仅 pending 订单显示）%>
+    <%# Feature 3.3.1 - Payment button (only displayed for pending orders）%>
     <% if @order.pending? %>
       <%= link_to new_payment_path(order_id: @order.id), class: "btn btn-success" do %>
         <i class="bi bi-credit-card me-1"></i> Pay Now

@@ -1,12 +1,11 @@
-# app/controllers/payments_controller.rb
-# Feature 3.3.1 - Stripe 支付集成
+# Feature 3.3.1 -Stripe Payments Integration
 
 class PaymentsController < ApplicationController
   before_action :authenticate_customer!
   before_action :set_order, only: [:new, :create]
 
   # GET /payments/new?order_id=xxx
-  # 显示支付页面
+  # Show payment page
   def new
     unless @order.pending?
       redirect_to customers_order_path(@order), notice: 'This order has already been paid.'
@@ -15,7 +14,7 @@ class PaymentsController < ApplicationController
   end
 
   # POST /payments
-  # 创建 Stripe Checkout Session
+  # Create Stripe Checkout Sessionn
   def create
     unless @order.pending?
       redirect_to customers_order_path(@order), alert: 'This order has already been paid.'
@@ -23,7 +22,7 @@ class PaymentsController < ApplicationController
     end
 
     begin
-      # 创建 Stripe Checkout Session
+      # Create Stripe Checkout Session
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         customer_email: current_customer.email,
@@ -37,10 +36,10 @@ class PaymentsController < ApplicationController
         }
       )
 
-      # 保存 Checkout Session ID 到订单
+      # Save Checkout Session ID to order
       @order.update!(stripe_checkout_id: session.id)
 
-      # 重定向到 Stripe Checkout 页面
+      # Redirect to Stripe Checkout page
       redirect_to session.url, allow_other_host: true
 
     rescue Stripe::StripeError => e
@@ -50,7 +49,7 @@ class PaymentsController < ApplicationController
   end
 
   # GET /payments/success
-  # 支付成功回调
+  # Payment successful callback
   def success
     @order = current_customer.orders.find_by(id: params[:order_id])
     
@@ -59,16 +58,16 @@ class PaymentsController < ApplicationController
       return
     end
 
-    # 验证 Stripe Session
+    # Verify Stripe Session
     if params[:session_id].present?
       begin
         session = Stripe::Checkout::Session.retrieve(params[:session_id])
         
         if session.payment_status == 'paid'
-          # 更新订单状态 (Feature 3.2.2)
+          # Update order status (Feature 3.2.2)
           @order.mark_as_paid!(session.payment_intent, session.id)
           
-          # 创建 Payment 记录
+          # Create Payment record
           create_payment_record(session)
           
           flash[:notice] = 'Payment successful! Thank you for your order.'
@@ -80,7 +79,7 @@ class PaymentsController < ApplicationController
   end
 
   # GET /payments/cancel
-  # 支付取消
+  # Payment Cancellation
   def cancel
     @order = current_customer.orders.find_by(id: params[:order_id])
     flash[:alert] = 'Payment was cancelled. You can try again or contact support.'
@@ -96,7 +95,7 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # 构建 Stripe line_items
+  #Build Stripe line_items
   def build_line_items
     items = @order.order_items.includes(:product).map do |item|
       {
@@ -106,13 +105,13 @@ class PaymentsController < ApplicationController
             name: item.product.name,
             description: item.product.description.truncate(100)
           },
-          unit_amount: (item.purchase_price * 100).to_i  # Stripe 使用分
+          unit_amount: (item.purchase_price * 100).to_i  # Stripe usage cents units
         },
         quantity: item.quantity
       }
     end
 
-    # 添加税费作为单独的行项目
+    # Add taxes as separate line items
     tax_total = @order.gst_amount + @order.pst_amount + @order.hst_amount
     if tax_total > 0
       items << {
@@ -130,11 +129,11 @@ class PaymentsController < ApplicationController
     items
   end
 
-  # 创建 Payment 记录 (Feature 3.3.1)
+  # Create Payment record (Feature 3.3.1)
   def create_payment_record(session)
     return if @order.payment.present?
 
-    # 获取 Payment Intent 详情
+    # Get Payment Intent details
     payment_intent = Stripe::PaymentIntent.retrieve(session.payment_intent)
     payment_method = Stripe::PaymentMethod.retrieve(payment_intent.payment_method)
 
