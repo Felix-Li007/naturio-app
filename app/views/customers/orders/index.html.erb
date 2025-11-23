@@ -47,8 +47,12 @@
                   <%= number_to_currency(order.grand_total) %>
                 </td>
                 <td class="text-end">
-                  <%= link_to "View Details", customers_order_path(order), 
-                      class: "btn btn-sm btn-outline-success" %>
+                  <%= link_to "View", customers_order_path(order), class: "btn btn-sm btn-outline-success" %>
+                  <% if order.pending? %>
+                    <%= link_to new_payment_path(order_id: order.id), class: "btn btn-sm btn-success me-1" do %>
+                    <i class="bi bi-credit-card"></i> Pay
+                    <% end %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>
