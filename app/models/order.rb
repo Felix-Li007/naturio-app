@@ -31,13 +31,37 @@ class Order < ApplicationRecord
     status == 'shipped'
   end
 
-  def mark_as_paid!(stripe_payment_id = nil)
-    update!(status: 'paid', stripe_payment_id: stripe_payment_id)
-  end
+  # Stripe 相关方法
+def stripe_checkout_url
+  return nil unless stripe_checkout_id.present?
+  # 用于重新支付
+end
 
-  def mark_as_shipped!
+
+def mark_as_shipped!
     update!(status: 'shipped', shipped_at: Time.current)
-  end
+end
+
+def mark_as_paid!(stripe_payment_id = nil, stripe_checkout_id = nil)
+  update!(
+    status: 'paid',
+    stripe_payment_id: stripe_payment_id,
+    stripe_checkout_id: stripe_checkout_id,
+     payment_at: Time.current
+  )
+end
+
+def create_payment_record(stripe_data)
+  create_payment!(
+    stripe_payment_id: stripe_data[:payment_intent],
+    stripe_customer_id: stripe_data[:customer],
+    amount: grand_total,
+    status: 'completed',
+    card_type: stripe_data[:card_brand],
+    card_last_four: stripe_data[:card_last4]
+  )
+end
+
 
    # Associations that allow Ransack searches
   def self.ransackable_associations(auth_object = nil)
