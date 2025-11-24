@@ -1,0 +1,31 @@
+﻿name,description,price,stock,on_sale,is_new,categories
+Organic Bananas Bundle,"Fresh organic bananas from Ecuador, rich in potassium and naturally sweet. Perfect for smoothies, baking, or a healthy snack.",4.99,100,TRUE,FALSE,Organic Produce
+Organic Baby Spinach,"Tender organic baby spinach leaves, pre-washed and ready to eat. Great for salads, smoothies, or sautéing.",5.49,75,FALSE,FALSE,Organic Produce
+Organic Avocados (3 pack),Creamy Hass avocados grown organically. Rich in healthy fats and perfect for guacamole or toast.,7.99,50,TRUE,FALSE,Organic Produce
+Organic Blueberries,Sweet and tangy organic blueberries packed with antioxidants. Fresh from local farms.,6.99,60,FALSE,TRUE,Organic Produce
+Organic Kale Bunch,"Nutrient-dense organic kale, perfect for salads, chips, or adding to smoothies for extra nutrition.",3.99,80,FALSE,FALSE,Organic Produce
+Vitamin D3 2000 IU,High-potency Vitamin D3 supplements to support bone health and immune function. 120 softgels per bottle.,18.99,150,FALSE,FALSE,Natural Supplements
+Organic Turmeric Capsules,Powerful anti-inflammatory turmeric with black pepper for enhanced absorption. 90 capsules.,24.99,100,FALSE,TRUE,Natural Supplements
+Omega-3 Fish Oil,Pure wild-caught fish oil providing essential EPA and DHA fatty acids for heart and brain health.,29.99,80,FALSE,FALSE,Natural Supplements
+Probiotic 50 Billion CFU,Multi-strain probiotic supplement for digestive health and immune support. 30 capsules.,34.99,60,TRUE,FALSE,Natural Supplements
+Magnesium Glycinate,"Highly absorbable magnesium for muscle relaxation, sleep support, and stress relief. 120 capsules.",22.9,90,FALSE,FALSE,Natural Supplements
+Gluten-Free Flour Blend,"All-purpose gluten-free flour perfect for baking bread, cakes, and pastries. 1kg bag.",8.99,120,FALSE,FALSE,Gluten-Free Products
+GF Pasta Variety Pack,"Assorted gluten-free pasta shapes made from rice and quinoa. Includes penne, fusilli, and spaghetti.",12.99,70,FALSE,TRUE,Gluten-Free Products
+Gluten-Free Oats,"Certified gluten-free rolled oats, perfect for oatmeal, granola, or baking. 500g.",6.99,100,FALSE,FALSE,Gluten-Free Products
+GF Crackers Multi-Seed,Crunchy multi-seed crackers made without gluten. Great with cheese or dips.,5.49,85,FALSE,FALSE,Gluten-Free Products|Organic Snacks
+Gluten-Free Bread Loaf,Soft and delicious gluten-free sandwich bread. No artificial preservatives.,7.99,40,TRUE,FALSE,Gluten-Free Products
+Bamboo Paper Towels,Reusable bamboo paper towels that replace up to 60 rolls of traditional paper towels. Washable and eco-friendly.,15.99,200,FALSE,TRUE,Eco-Friendly Household
+Plant-Based Dish Soap,"Biodegradable dish soap made from plant-derived ingredients. Tough on grease, gentle on the planet.",6.99,150,FALSE,FALSE,Eco-Friendly Household
+Beeswax Food Wraps,Set of 3 reusable beeswax wraps to replace plastic wrap. Various sizes included.,19.99,80,FALSE,FALSE,Eco-Friendly Household
+Natural Laundry Detergent,Concentrated plant-based laundry detergent. Free from harsh chemicals. 64 loads.,14.99,100,TRUE,FALSE,Eco-Friendly Household
+Compostable Garbage Bags,Pack of 50 compostable garbage bags made from plant starch. Perfect for kitchen compost.,12.99,120,FALSE,FALSE,Eco-Friendly Household
+Organic Green Tea Collection,"Assortment of 6 organic green tea varieties including matcha, sencha, and jasmine. 48 tea bags.",16.99,90,FALSE,FALSE,Health Beverages
+Cold-Pressed Juice Pack,"Set of 6 cold-pressed organic juices. Includes green, citrus, and berry blends.",29.99,45,FALSE,FALSE,Health Beverages
+Organic Fair-Trade Coffee,Medium roast whole bean coffee from small organic farms. Rich and smooth flavor. 340g.,14.99,110,FALSE,FALSE,Health Beverages
+Herbal Sleep Tea,"Calming blend of chamomile, lavender, and valerian root to promote restful sleep. 20 bags.",8.99,70,FALSE,FALSE,Health Beverages
+Organic Kombucha Variety,Pack of 4 organic kombucha drinks in assorted flavors. Naturally fermented with live cultures.,15.99,55,TRUE,FALSE,Health Beverages
+Organic Trail Mix,"Premium mix of organic nuts, seeds, and dried fruits. Perfect for hiking or office snacking. 400g.",11.99,130,FALSE,FALSE,Organic Snacks
+Dark Chocolate Almonds,Organic almonds covered in rich 70% dark chocolate. Antioxidant-rich indulgence. 200g.,9.99,85,FALSE,TRUE,Organic Snacks
+Kale Chips Sea Salt,"Crispy organic kale chips with just a touch of sea salt. Low calorie, high nutrition. 50g.",5.99,100,FALSE,FALSE,Organic Snacks
+Organic Energy Bars (6 pack),"Wholesome energy bars made with oats, nuts, and dried fruit. No added sugar.",14.99,90,FALSE,FALSE,Organic Snacks
+Coconut Chips Toasted,Lightly toasted organic coconut chips. Great for snacking or adding to recipes. 150g.,4.99,110,TRUE,FALSE,Organic Snacks

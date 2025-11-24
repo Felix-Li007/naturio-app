@@ -1,0 +1,14 @@
+name,code,gst_rate,pst_rate,hst_rate
+British Columbia,BC,5,7,0
+Alberta,AB,5,0,0
+Saskatchewan,SK,5,6,0
+Manitoba,MB,5,7,0
+Ontario,ON,0,0,13
+Quebec,QC,5,9.975,0
+New Brunswick,NB,0,0,15
+Nova Scotia,NS,0,0,15
+Prince Edward Island,PE,0,0,15
+Newfoundland and Labrador,NL,0,0,15
+Yukon,YT,5,0,0
+Northwest Territories,NT,5,0,0
+Nunavut,NU,5,0,0
