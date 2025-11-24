@@ -9,8 +9,18 @@ services:
     volumes:
       - ../..:/workspaces:cached
 
-    # Prevent container from exiting
-    command: sleep infinity
+    # Start a VNC server to view Cypress tests
+    # sleep infinity
+    command: >
+      sh -c "
+        Xvfb :99 -screen 0 1440x900x24 &
+        export DISPLAY=:99
+        sleep 3
+        x11vnc -display :99 -nopw -forever &
+        npx cypress open
+      "
+    ports:
+      - "5901:5900" # VNC
 
     networks:
       - rails_network
