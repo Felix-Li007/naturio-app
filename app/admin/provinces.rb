@@ -18,7 +18,7 @@ ActiveAdmin.register Province do
     column :hst_rate do |p|
       "#{p.hst_rate}%"
     end
-    column 'Total Tax' do |p|
+    column "Total Tax" do |p|
       "#{p.total_tax_rate}%"
     end
     actions
@@ -28,14 +28,14 @@ ActiveAdmin.register Province do
   filter :code
 
   form do |f|
-    f.inputs 'Province Details' do
+    f.inputs "Province Details" do
       f.input :name
-      f.input :code, hint: 'Two-letter code (e.g., MB, ON)'
+      f.input :code, hint: "Two-letter code (e.g., MB, ON)"
     end
-    f.inputs 'Tax Rates' do
-      f.input :gst_rate, hint: 'GST percentage'
-      f.input :pst_rate, hint: 'PST percentage'
-      f.input :hst_rate, hint: 'HST percentage'
+    f.inputs "Tax Rates" do
+      f.input :gst_rate, hint: "GST percentage"
+      f.input :pst_rate, hint: "PST percentage"
+      f.input :hst_rate, hint: "HST percentage"
     end
     f.actions
   end

@@ -8,7 +8,7 @@ class Address < ApplicationRecord
   validates :city, presence: true, length: { maximum: 100 }
   validates :postal_code, presence: true,
                           format: { with: /\A[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d\z/,
-                                    message: 'must be valid Canadian postal code' }
+                                    message: "must be valid Canadian postal code" }
   validates :address_type, inclusion: { in: %w[shipping billing] }
 
   # Methods

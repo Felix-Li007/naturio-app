@@ -13,7 +13,7 @@ class CheckoutsController < ApplicationController
   def show
     @addresses = current_customer.addresses.includes(:province)
     @selected_address = current_customer.primary_address
-    
+
     # 如果没有地址，跳转到添加地址
     if @addresses.empty?
       redirect_to address_checkouts_path
@@ -34,7 +34,7 @@ class CheckoutsController < ApplicationController
     @provinces = Province.order(:name)
 
     if @address.save
-      redirect_to checkouts_path, notice: 'Address saved successfully.'
+      redirect_to checkouts_path, notice: "Address saved successfully."
     else
       render :address, status: :unprocessable_entity
     end
@@ -44,9 +44,9 @@ class CheckoutsController < ApplicationController
   # Step 2: 订单预览 + 税费计算 (Feature 3.2.3)
   def review
     @address = current_customer.addresses.find_by(id: params[:address_id])
-    
+
     unless @address
-      redirect_to checkout_path, alert: 'Please select a shipping address.'
+      redirect_to checkout_path, alert: "Please select a shipping address."
       return
     end
 
@@ -61,9 +61,9 @@ class CheckoutsController < ApplicationController
   # Step 3: 创建订单 (Feature 3.1.3, 3.3.2)
   def create
     @address = current_customer.addresses.find_by(id: session[:checkout_address_id])
-    
+
     unless @address
-      redirect_to checkout_path, alert: 'Please select a shipping address.'
+      redirect_to checkout_path, alert: "Please select a shipping address."
       return
     end
 
@@ -75,10 +75,10 @@ class CheckoutsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       @order.save!
-      
+
       # 创建订单项目，保存购买时价格 (Feature 3.3.2)
       create_order_items(@order)
-      
+
       # 更新订单总计
       @order.update!(
         subtotal: @subtotal,
@@ -110,9 +110,9 @@ class CheckoutsController < ApplicationController
   # Step 4: 订单确认
   def confirmation
     @order = current_customer.orders.find_by(id: session[:last_order_id])
-    
+
     unless @order
-      redirect_to root_path, alert: 'Order not found.'
+      redirect_to root_path, alert: "Order not found."
       return
     end
 
@@ -124,7 +124,7 @@ class CheckoutsController < ApplicationController
 
   def ensure_cart_not_empty
     if session[:cart].blank? || session[:cart].empty?
-      redirect_to cart_path, alert: 'Your cart is empty.'
+      redirect_to cart_path, alert: "Your cart is empty."
     end
   end
 
@@ -147,19 +147,19 @@ class CheckoutsController < ApplicationController
   # Feature 3.2.3 - 省份税率计算
   def calculate_totals(province)
     @subtotal = @cart_items.sum { |item| item[:subtotal] }
-    
+
     @gst_amount = @subtotal * (province.gst_rate / 100)
     @pst_amount = @subtotal * (province.pst_rate / 100)
     @hst_amount = @subtotal * (province.hst_rate / 100)
     @tax_total = @gst_amount + @pst_amount + @hst_amount
-    
+
     @grand_total = @subtotal + @tax_total
   end
 
   def build_order(address)
     current_customer.orders.build(
       address: address,
-      status: 'pending',
+      status: "pending",
       subtotal: 0,
       gst_amount: 0,
       pst_amount: 0,
@@ -184,7 +184,7 @@ class CheckoutsController < ApplicationController
     @cart_items.each do |item|
       product = item[:product]
       new_quantity = product.stock_quantity - item[:quantity]
-      product.update!(stock_quantity: [new_quantity, 0].max)
+      product.update!(stock_quantity: [ new_quantity, 0 ].max)
     end
   end
 

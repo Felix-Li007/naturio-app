@@ -10,9 +10,9 @@ class Order < ApplicationRecord
   validates :grand_total, numericality: { greater_than_or_equal_to: 0 }
 
   # Scopes
-  scope :pending, -> { where(status: 'pending') }
-  scope :paid, -> { where(status: 'paid') }
-  scope :shipped, -> { where(status: 'shipped') }
+  scope :pending, -> { where(status: "pending") }
+  scope :paid, -> { where(status: "paid") }
+  scope :shipped, -> { where(status: "shipped") }
   scope :recent, -> { order(created_at: :desc) }
 
   # Callbacks
@@ -20,30 +20,30 @@ class Order < ApplicationRecord
 
   # Status Methods
   def pending?
-    status == 'pending'
+    status == "pending"
   end
 
   def paid?
-    status == 'paid'
+    status == "paid"
   end
 
   def shipped?
-    status == 'shipped'
+    status == "shipped"
   end
 
 def stripe_checkout_url
-  return nil unless stripe_checkout_id.present?
+  nil unless stripe_checkout_id.present?
   # for repayment
 end
 
 
 def mark_as_shipped!
-    update!(status: 'shipped', shipped_at: Time.current)
+    update!(status: "shipped", shipped_at: Time.current)
 end
 
 def mark_as_paid!(stripe_payment_id = nil, stripe_checkout_id = nil)
   update!(
-    status: 'paid',
+    status: "paid",
     stripe_payment_id: stripe_payment_id,
     stripe_checkout_id: stripe_checkout_id,
      payment_at: Time.current
@@ -55,16 +55,16 @@ def create_payment_record(stripe_data)
     stripe_payment_id: stripe_data[:payment_intent],
     stripe_customer_id: stripe_data[:customer],
     amount: grand_total,
-    status: 'completed',
+    status: "completed",
     card_type: stripe_data[:card_brand],
     card_last_four: stripe_data[:card_last4]
   )
 end
 
 
-   # Associations that allow Ransack searches
+  # Associations that allow Ransack searches
   def self.ransackable_associations(auth_object = nil)
-    ["address", "customer", "order_items", "payment"]
+    [ "address", "customer", "order_items", "payment" ]
   end
 
   def self.ransackable_attributes(auth_object = nil)
@@ -83,5 +83,4 @@ end
     end
     self.grand_total = subtotal + gst_amount + pst_amount + hst_amount
   end
-
 end

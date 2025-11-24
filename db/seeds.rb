@@ -32,17 +32,17 @@ provinces_data = [
   { name: 'Alberta', code: 'AB', gst_rate: 5, pst_rate: 0, hst_rate: 0 },
   { name: 'Saskatchewan', code: 'SK', gst_rate: 5, pst_rate: 6, hst_rate: 0 },
   { name: 'Manitoba', code: 'MB', gst_rate: 5, pst_rate: 7, hst_rate: 0 },
-  
+
   # 中部省份 (HST)
   { name: 'Ontario', code: 'ON', gst_rate: 0, pst_rate: 0, hst_rate: 13 },
-  
+
   # 东部省份 (HST)
   { name: 'Quebec', code: 'QC', gst_rate: 5, pst_rate: 9.975, hst_rate: 0 },
   { name: 'New Brunswick', code: 'NB', gst_rate: 0, pst_rate: 0, hst_rate: 15 },
   { name: 'Nova Scotia', code: 'NS', gst_rate: 0, pst_rate: 0, hst_rate: 15 },
   { name: 'Prince Edward Island', code: 'PE', gst_rate: 0, pst_rate: 0, hst_rate: 15 },
   { name: 'Newfoundland and Labrador', code: 'NL', gst_rate: 0, pst_rate: 0, hst_rate: 15 },
-  
+
   # 北部领地
   { name: 'Yukon', code: 'YT', gst_rate: 5, pst_rate: 0, hst_rate: 0 },
   { name: 'Northwest Territories', code: 'NT', gst_rate: 5, pst_rate: 0, hst_rate: 0 },
@@ -91,46 +91,46 @@ snacks = Category.find_by(name: 'Organic Snacks')
 
 products_data = [
   # Organic Produce
-  { name: 'Organic Bananas Bundle', description: 'Fresh organic bananas from Ecuador, rich in potassium and naturally sweet. Perfect for smoothies, baking, or a healthy snack.', price: 4.99, stock: 100, categories: [produce], on_sale: true },
-  { name: 'Organic Baby Spinach', description: 'Tender organic baby spinach leaves, pre-washed and ready to eat. Great for salads, smoothies, or sautéing.', price: 5.49, stock: 75, categories: [produce] },
-  { name: 'Organic Avocados (3 pack)', description: 'Creamy Hass avocados grown organically. Rich in healthy fats and perfect for guacamole or toast.', price: 7.99, stock: 50, categories: [produce], on_sale: true },
-  { name: 'Organic Blueberries', description: 'Sweet and tangy organic blueberries packed with antioxidants. Fresh from local farms.', price: 6.99, stock: 60, categories: [produce], is_new: true },
-  { name: 'Organic Kale Bunch', description: 'Nutrient-dense organic kale, perfect for salads, chips, or adding to smoothies for extra nutrition.', price: 3.99, stock: 80, categories: [produce] },
+  { name: 'Organic Bananas Bundle', description: 'Fresh organic bananas from Ecuador, rich in potassium and naturally sweet. Perfect for smoothies, baking, or a healthy snack.', price: 4.99, stock: 100, categories: [ produce ], on_sale: true },
+  { name: 'Organic Baby Spinach', description: 'Tender organic baby spinach leaves, pre-washed and ready to eat. Great for salads, smoothies, or sautéing.', price: 5.49, stock: 75, categories: [ produce ] },
+  { name: 'Organic Avocados (3 pack)', description: 'Creamy Hass avocados grown organically. Rich in healthy fats and perfect for guacamole or toast.', price: 7.99, stock: 50, categories: [ produce ], on_sale: true },
+  { name: 'Organic Blueberries', description: 'Sweet and tangy organic blueberries packed with antioxidants. Fresh from local farms.', price: 6.99, stock: 60, categories: [ produce ], is_new: true },
+  { name: 'Organic Kale Bunch', description: 'Nutrient-dense organic kale, perfect for salads, chips, or adding to smoothies for extra nutrition.', price: 3.99, stock: 80, categories: [ produce ] },
 
   # Natural Supplements
-  { name: 'Vitamin D3 2000 IU', description: 'High-potency Vitamin D3 supplements to support bone health and immune function. 120 softgels per bottle.', price: 18.99, stock: 150, categories: [supplements] },
-  { name: 'Organic Turmeric Capsules', description: 'Powerful anti-inflammatory turmeric with black pepper for enhanced absorption. 90 capsules.', price: 24.99, stock: 100, categories: [supplements], is_new: true },
-  { name: 'Omega-3 Fish Oil', description: 'Pure wild-caught fish oil providing essential EPA and DHA fatty acids for heart and brain health.', price: 29.99, stock: 80, categories: [supplements] },
-  { name: 'Probiotic 50 Billion CFU', description: 'Multi-strain probiotic supplement for digestive health and immune support. 30 capsules.', price: 34.99, stock: 60, categories: [supplements], on_sale: true },
-  { name: 'Magnesium Glycinate', description: 'Highly absorbable magnesium for muscle relaxation, sleep support, and stress relief. 120 capsules.', price: 22.99, stock: 90, categories: [supplements] },
+  { name: 'Vitamin D3 2000 IU', description: 'High-potency Vitamin D3 supplements to support bone health and immune function. 120 softgels per bottle.', price: 18.99, stock: 150, categories: [ supplements ] },
+  { name: 'Organic Turmeric Capsules', description: 'Powerful anti-inflammatory turmeric with black pepper for enhanced absorption. 90 capsules.', price: 24.99, stock: 100, categories: [ supplements ], is_new: true },
+  { name: 'Omega-3 Fish Oil', description: 'Pure wild-caught fish oil providing essential EPA and DHA fatty acids for heart and brain health.', price: 29.99, stock: 80, categories: [ supplements ] },
+  { name: 'Probiotic 50 Billion CFU', description: 'Multi-strain probiotic supplement for digestive health and immune support. 30 capsules.', price: 34.99, stock: 60, categories: [ supplements ], on_sale: true },
+  { name: 'Magnesium Glycinate', description: 'Highly absorbable magnesium for muscle relaxation, sleep support, and stress relief. 120 capsules.', price: 22.99, stock: 90, categories: [ supplements ] },
 
   # Gluten-Free Products
-  { name: 'Gluten-Free Flour Blend', description: 'All-purpose gluten-free flour perfect for baking bread, cakes, and pastries. 1kg bag.', price: 8.99, stock: 120, categories: [gluten_free] },
-  { name: 'GF Pasta Variety Pack', description: 'Assorted gluten-free pasta shapes made from rice and quinoa. Includes penne, fusilli, and spaghetti.', price: 12.99, stock: 70, categories: [gluten_free], is_new: true },
-  { name: 'Gluten-Free Oats', description: 'Certified gluten-free rolled oats, perfect for oatmeal, granola, or baking. 500g.', price: 6.99, stock: 100, categories: [gluten_free] },
-  { name: 'GF Crackers Multi-Seed', description: 'Crunchy multi-seed crackers made without gluten. Great with cheese or dips.', price: 5.49, stock: 85, categories: [gluten_free, snacks] },
-  { name: 'Gluten-Free Bread Loaf', description: 'Soft and delicious gluten-free sandwich bread. No artificial preservatives.', price: 7.99, stock: 40, categories: [gluten_free], on_sale: true },
+  { name: 'Gluten-Free Flour Blend', description: 'All-purpose gluten-free flour perfect for baking bread, cakes, and pastries. 1kg bag.', price: 8.99, stock: 120, categories: [ gluten_free ] },
+  { name: 'GF Pasta Variety Pack', description: 'Assorted gluten-free pasta shapes made from rice and quinoa. Includes penne, fusilli, and spaghetti.', price: 12.99, stock: 70, categories: [ gluten_free ], is_new: true },
+  { name: 'Gluten-Free Oats', description: 'Certified gluten-free rolled oats, perfect for oatmeal, granola, or baking. 500g.', price: 6.99, stock: 100, categories: [ gluten_free ] },
+  { name: 'GF Crackers Multi-Seed', description: 'Crunchy multi-seed crackers made without gluten. Great with cheese or dips.', price: 5.49, stock: 85, categories: [ gluten_free, snacks ] },
+  { name: 'Gluten-Free Bread Loaf', description: 'Soft and delicious gluten-free sandwich bread. No artificial preservatives.', price: 7.99, stock: 40, categories: [ gluten_free ], on_sale: true },
 
   # Eco-Friendly Household
-  { name: 'Bamboo Paper Towels', description: 'Reusable bamboo paper towels that replace up to 60 rolls of traditional paper towels. Washable and eco-friendly.', price: 15.99, stock: 200, categories: [eco_friendly], is_new: true },
-  { name: 'Plant-Based Dish Soap', description: 'Biodegradable dish soap made from plant-derived ingredients. Tough on grease, gentle on the planet.', price: 6.99, stock: 150, categories: [eco_friendly] },
-  { name: 'Beeswax Food Wraps', description: 'Set of 3 reusable beeswax wraps to replace plastic wrap. Various sizes included.', price: 19.99, stock: 80, categories: [eco_friendly] },
-  { name: 'Natural Laundry Detergent', description: 'Concentrated plant-based laundry detergent. Free from harsh chemicals. 64 loads.', price: 14.99, stock: 100, categories: [eco_friendly], on_sale: true },
-  { name: 'Compostable Garbage Bags', description: 'Pack of 50 compostable garbage bags made from plant starch. Perfect for kitchen compost.', price: 12.99, stock: 120, categories: [eco_friendly] },
+  { name: 'Bamboo Paper Towels', description: 'Reusable bamboo paper towels that replace up to 60 rolls of traditional paper towels. Washable and eco-friendly.', price: 15.99, stock: 200, categories: [ eco_friendly ], is_new: true },
+  { name: 'Plant-Based Dish Soap', description: 'Biodegradable dish soap made from plant-derived ingredients. Tough on grease, gentle on the planet.', price: 6.99, stock: 150, categories: [ eco_friendly ] },
+  { name: 'Beeswax Food Wraps', description: 'Set of 3 reusable beeswax wraps to replace plastic wrap. Various sizes included.', price: 19.99, stock: 80, categories: [ eco_friendly ] },
+  { name: 'Natural Laundry Detergent', description: 'Concentrated plant-based laundry detergent. Free from harsh chemicals. 64 loads.', price: 14.99, stock: 100, categories: [ eco_friendly ], on_sale: true },
+  { name: 'Compostable Garbage Bags', description: 'Pack of 50 compostable garbage bags made from plant starch. Perfect for kitchen compost.', price: 12.99, stock: 120, categories: [ eco_friendly ] },
 
   # Health Beverages
-  { name: 'Organic Green Tea Collection', description: 'Assortment of 6 organic green tea varieties including matcha, sencha, and jasmine. 48 tea bags.', price: 16.99, stock: 90, categories: [beverages] },
-  { name: 'Cold-Pressed Juice Pack', description: 'Set of 6 cold-pressed organic juices. Includes green, citrus, and berry blends.', price: 29.99, stock: 45, categories: [beverages], is_new: true },
-  { name: 'Organic Fair-Trade Coffee', description: 'Medium roast whole bean coffee from small organic farms. Rich and smooth flavor. 340g.', price: 14.99, stock: 110, categories: [beverages] },
-  { name: 'Herbal Sleep Tea', description: 'Calming blend of chamomile, lavender, and valerian root to promote restful sleep. 20 bags.', price: 8.99, stock: 70, categories: [beverages] },
-  { name: 'Organic Kombucha Variety', description: 'Pack of 4 organic kombucha drinks in assorted flavors. Naturally fermented with live cultures.', price: 15.99, stock: 55, categories: [beverages], on_sale: true },
+  { name: 'Organic Green Tea Collection', description: 'Assortment of 6 organic green tea varieties including matcha, sencha, and jasmine. 48 tea bags.', price: 16.99, stock: 90, categories: [ beverages ] },
+  { name: 'Cold-Pressed Juice Pack', description: 'Set of 6 cold-pressed organic juices. Includes green, citrus, and berry blends.', price: 29.99, stock: 45, categories: [ beverages ], is_new: true },
+  { name: 'Organic Fair-Trade Coffee', description: 'Medium roast whole bean coffee from small organic farms. Rich and smooth flavor. 340g.', price: 14.99, stock: 110, categories: [ beverages ] },
+  { name: 'Herbal Sleep Tea', description: 'Calming blend of chamomile, lavender, and valerian root to promote restful sleep. 20 bags.', price: 8.99, stock: 70, categories: [ beverages ] },
+  { name: 'Organic Kombucha Variety', description: 'Pack of 4 organic kombucha drinks in assorted flavors. Naturally fermented with live cultures.', price: 15.99, stock: 55, categories: [ beverages ], on_sale: true },
 
   # Organic Snacks
-  { name: 'Organic Trail Mix', description: 'Premium mix of organic nuts, seeds, and dried fruits. Perfect for hiking or office snacking. 400g.', price: 11.99, stock: 130, categories: [snacks] },
-  { name: 'Dark Chocolate Almonds', description: 'Organic almonds covered in rich 70% dark chocolate. Antioxidant-rich indulgence. 200g.', price: 9.99, stock: 85, categories: [snacks], is_new: true },
-  { name: 'Kale Chips Sea Salt', description: 'Crispy organic kale chips with just a touch of sea salt. Low calorie, high nutrition. 50g.', price: 5.99, stock: 100, categories: [snacks] },
-  { name: 'Organic Energy Bars (6 pack)', description: 'Wholesome energy bars made with oats, nuts, and dried fruit. No added sugar.', price: 14.99, stock: 90, categories: [snacks] },
-  { name: 'Coconut Chips Toasted', description: 'Lightly toasted organic coconut chips. Great for snacking or adding to recipes. 150g.', price: 4.99, stock: 110, categories: [snacks], on_sale: true }
+  { name: 'Organic Trail Mix', description: 'Premium mix of organic nuts, seeds, and dried fruits. Perfect for hiking or office snacking. 400g.', price: 11.99, stock: 130, categories: [ snacks ] },
+  { name: 'Dark Chocolate Almonds', description: 'Organic almonds covered in rich 70% dark chocolate. Antioxidant-rich indulgence. 200g.', price: 9.99, stock: 85, categories: [ snacks ], is_new: true },
+  { name: 'Kale Chips Sea Salt', description: 'Crispy organic kale chips with just a touch of sea salt. Low calorie, high nutrition. 50g.', price: 5.99, stock: 100, categories: [ snacks ] },
+  { name: 'Organic Energy Bars (6 pack)', description: 'Wholesome energy bars made with oats, nuts, and dried fruit. No added sugar.', price: 14.99, stock: 90, categories: [ snacks ] },
+  { name: 'Coconut Chips Toasted', description: 'Lightly toasted organic coconut chips. Great for snacking or adding to recipes. 150g.', price: 4.99, stock: 110, categories: [ snacks ], on_sale: true }
 ]
 
 products_data.each do |prod|
@@ -141,7 +141,7 @@ products_data.each do |prod|
     p.on_sale = prod[:on_sale] || false
     p.is_new = prod[:is_new] || false
   end
-  
+
   # 添加分类关联
   prod[:categories].each do |category|
     ProductCategory.find_or_create_by!(product: product, category: category)

@@ -1,16 +1,16 @@
 # Feature 3.1.1 ✯ （Session)
-# Feature 3.1.2 
+# Feature 3.1.2
 
 class CartsController < ApplicationController
   before_action :initialize_cart
-  before_action :set_product, only: [:add, :update, :remove]
+  before_action :set_product, only: [ :add, :update, :remove ]
 
   def show
     @cart_items = load_cart_items
     @cart_total = calculate_cart_total
   end
 
-  # Feature 3.1.1 ✯ 
+  # Feature 3.1.1 ✯
   def add
     quantity = (params[:quantity] || 1).to_i
     quantity = 1 if quantity < 1

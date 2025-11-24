@@ -4,8 +4,8 @@ class Category < ApplicationRecord
   has_many :products, through: :product_categories
 
   # Validations (Feature 4.2.1)
-  validates :name, presence: true, 
-                   uniqueness: true, 
+  validates :name, presence: true,
+                   uniqueness: true,
                    length: { maximum: 50 }
   validates :description, length: { maximum: 500 }
 
@@ -13,6 +13,6 @@ class Category < ApplicationRecord
   scope :alphabetical, -> { order(:name) }
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "description", "id", "name", "updated_at"]
+    [ "created_at", "description", "id", "name", "updated_at" ]
   end
 end

@@ -17,16 +17,16 @@ class Customer < ApplicationRecord
 
   # Methods
   def primary_address
-    addresses.find_by(address_type: 'shipping') || addresses.first
+    addresses.find_by(address_type: "shipping") || addresses.first
   end
 
   def full_name
     username
   end
 
-   # Explicitly specify which fields are searchable
+  # Explicitly specify which fields are searchable
   def self.ransackable_attributes(auth_object = nil)
     # List only the fields you want searchable in ActiveAdmin/Ransack
-    ["id", "email", "username", "created_at", "updated_at"]
+    [ "id", "email", "username", "created_at", "updated_at" ]
   end
 end

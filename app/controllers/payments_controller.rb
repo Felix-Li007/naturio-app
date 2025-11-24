@@ -2,14 +2,14 @@
 
 class PaymentsController < ApplicationController
   before_action :authenticate_customer!
-  before_action :set_order, only: [:new, :create]
+  before_action :set_order, only: [ :new, :create ]
 
   # GET /payments/new?order_id=xxx
   # Show payment page
   def new
     unless @order.pending?
-      redirect_to customers_order_path(@order), notice: 'This order has already been paid.'
-      return
+      redirect_to customers_order_path(@order), notice: "This order has already been paid."
+      nil
     end
   end
 
@@ -17,18 +17,18 @@ class PaymentsController < ApplicationController
   # Create Stripe Checkout Sessionn
   def create
     unless @order.pending?
-      redirect_to customers_order_path(@order), alert: 'This order has already been paid.'
+      redirect_to customers_order_path(@order), alert: "This order has already been paid."
       return
     end
 
     begin
       # Create Stripe Checkout Session
       session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
+        payment_method_types: [ "card" ],
         customer_email: current_customer.email,
         line_items: build_line_items,
-        mode: 'payment',
-        success_url: success_payments_url(order_id: @order.id, session_id: '{CHECKOUT_SESSION_ID}'),
+        mode: "payment",
+        success_url: success_payments_url(order_id: @order.id, session_id: "{CHECKOUT_SESSION_ID}"),
         cancel_url: cancel_payments_url(order_id: @order.id),
         metadata: {
           order_id: @order.id,
@@ -52,9 +52,9 @@ class PaymentsController < ApplicationController
   # Payment successful callback
   def success
     @order = current_customer.orders.find_by(id: params[:order_id])
-    
+
     unless @order
-      redirect_to root_path, alert: 'Order not found.'
+      redirect_to root_path, alert: "Order not found."
       return
     end
 
@@ -62,15 +62,15 @@ class PaymentsController < ApplicationController
     if params[:session_id].present?
       begin
         session = Stripe::Checkout::Session.retrieve(params[:session_id])
-        
-        if session.payment_status == 'paid'
+
+        if session.payment_status == "paid"
           # Update order status (Feature 3.2.2)
           @order.mark_as_paid!(session.payment_intent, session.id)
-          
+
           # Create Payment record
           create_payment_record(session)
-          
-          flash[:notice] = 'Payment successful! Thank you for your order.'
+
+          flash[:notice] = "Payment successful! Thank you for your order."
         end
       rescue Stripe::StripeError => e
         Rails.logger.error "Stripe error: #{e.message}"
@@ -82,25 +82,25 @@ class PaymentsController < ApplicationController
   # Payment Cancellation
   def cancel
     @order = current_customer.orders.find_by(id: params[:order_id])
-    flash[:alert] = 'Payment was cancelled. You can try again or contact support.'
+    flash[:alert] = "Payment was cancelled. You can try again or contact support."
   end
 
   private
 
   def set_order
     @order = current_customer.orders.find_by(id: params[:order_id])
-    
+
     unless @order
-      redirect_to customers_orders_path, alert: 'Order not found.'
+      redirect_to customers_orders_path, alert: "Order not found."
     end
   end
 
-  #Build Stripe line_items
+  # Build Stripe line_items
   def build_line_items
     items = @order.order_items.includes(:product).map do |item|
       {
         price_data: {
-          currency: 'cad',
+          currency: "cad",
           product_data: {
             name: item.product.name,
             description: item.product.description.truncate(100)
@@ -116,9 +116,9 @@ class PaymentsController < ApplicationController
     if tax_total > 0
       items << {
         price_data: {
-          currency: 'cad',
+          currency: "cad",
           product_data: {
-            name: 'Tax (GST/PST/HST)'
+            name: "Tax (GST/PST/HST)"
           },
           unit_amount: (tax_total * 100).to_i
         },
@@ -141,7 +141,7 @@ class PaymentsController < ApplicationController
       stripe_payment_id: session.payment_intent,
       stripe_customer_id: session.customer,
       amount: @order.grand_total,
-      status: 'completed',
+      status: "completed",
       card_type: payment_method.card&.brand,
       card_last_four: payment_method.card&.last4
     )

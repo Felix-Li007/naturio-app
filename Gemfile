@@ -1,5 +1,9 @@
 source "https://rubygems.org"
 
+gem "htmlbeautifier"
+gem "erb-formatter"
+
+
 # Front-end resources
 gem "sprockets-rails", "~> 3.5"
 gem "sprockets", "~> 4.2"
@@ -16,7 +20,7 @@ gem "devise", "~> 4.9"
 gem "image_processing", "~> 1.2"
 gem "mini_magick", "~> 4.12"
 
-# cloud storage (Feature 5.3) 
+# cloud storage (Feature 5.3)
 gem "aws-sdk-s3", require: false
 # gem "google-cloud-storage", require: false
 
@@ -84,7 +88,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   # 测试数据生成 (Feature 1.6)
-  gem "faker", "~> 3.2"  
+  gem "faker", "~> 3.2"
   gem "rspec-rails", "~> 6.0"
 end
 

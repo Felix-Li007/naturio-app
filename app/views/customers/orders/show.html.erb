@@ -1,14 +1,11 @@
 <%# Feature 3.2.1 %>
-
 <% content_for :title, "Order ##{@order.id.to_s.rjust(6, '0')} - Northern Harvest" %>
-
 <div class="container py-5">
   <%= render 'shared/breadcrumbs', items: [
     { name: 'Home', path: root_path },
     { name: 'My Orders', path: customers_orders_path },
     { name: "Order ##{@order.id.to_s.rjust(6, '0')}", path: nil }
   ] %>
-
   <div class="row">
     <!-- Order Details -->
     <div class="col-lg-8">
@@ -19,31 +16,30 @@
             <%= order_status_badge(@order.status) %>
           </div>
         </div>
-
-        
         <div class="alert alert-<%= @order.pending? ? 'warning' : 'success' %> mt-4">
-  <div class="d-flex justify-content-between align-items-center">
-    <div>
-      <i class="bi bi-<%= @order.pending? ? 'clock' : 'check-circle' %> me-2"></i>
-      <strong>Order Status:</strong> <%= @order.status.titleize %>
-      <% if @order.pending? %>
-        <br><small>Your order is awaiting payment.</small>
-      <% elsif @order.paid? %>
-        <br><small>Payment received. Your order will be shipped soon.</small>
-      <% elsif @order.shipped? %>
-        <br><small>Your order has been shipped!</small>
-      <% end %>
-    </div>
-    
-    <%# Feature 3.3.1 - Payment button (only displayed for pending orders）%>
-    <% if @order.pending? %>
-      <%= link_to new_payment_path(order_id: @order.id), class: "btn btn-success" do %>
-        <i class="bi bi-credit-card me-1"></i> Pay Now
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-<%= @order.pending? ? 'clock' : 'check-circle' %> me-2"></i>
+              <strong>Order Status:</strong> <%= @order.status.titleize %>
+              <% if @order.pending? %>
+                <br>
+                <small>Your order is awaiting payment.</small>
+              <% elsif @order.paid? %>
+                <br>
+                <small>Payment received. Your order will be shipped soon.</small>
+              <% elsif @order.shipped? %>
+                <br>
+                <small>Your order has been shipped!</small>
+              <% end %>
+            </div>
+            <%# Feature 3.3.1 - Payment button (only displayed for pending orders）%>
+            <% if @order.pending? %>
+              <%= link_to new_payment_path(order_id: @order.id), class: "btn btn-success" do %>
+                <i class="bi bi-credit-card me-1"></i> Pay Now
+              <% end %>
+            <% end %>
+          </div>
+        </div>
         <div class="card-body">
           <!-- Order Items -->
           <h6 class="text-muted mb-3">Items Ordered</h6>
@@ -61,7 +57,6 @@
                   </div>
                 <% end %>
               </div>
-              
               <!-- Product Info -->
               <div class="flex-grow-1">
                 <%= link_to item.product.name, product_path(item.product), 
@@ -70,7 +65,6 @@
                   Qty: <%= item.quantity %> × <%= number_to_currency(item.purchase_price) %>
                 </div>
               </div>
-              
               <!-- Subtotal -->
               <div class="text-end">
                 <strong><%= number_to_currency(item.subtotal) %></strong>
@@ -79,7 +73,6 @@
           <% end %>
         </div>
       </div>
-
       <!-- Shipping Address -->
       <div class="card border-0 shadow-sm">
         <div class="card-body">
@@ -93,46 +86,38 @@
         </div>
       </div>
     </div>
-
     <!-- Order Summary -->
     <div class="col-lg-4">
       <div class="card border-0 shadow-sm">
         <div class="card-body">
           <h5 class="card-title mb-4">Order Summary</h5>
-          
           <div class="d-flex justify-content-between mb-2">
             <span class="text-muted">Subtotal</span>
             <span><%= number_to_currency(@order.subtotal) %></span>
           </div>
-          
           <% if @order.gst_amount > 0 %>
             <div class="d-flex justify-content-between mb-2">
               <span class="text-muted">GST (<%= @order.address.province.gst_rate %>%)</span>
               <span><%= number_to_currency(@order.gst_amount) %></span>
             </div>
           <% end %>
-          
           <% if @order.pst_amount > 0 %>
             <div class="d-flex justify-content-between mb-2">
               <span class="text-muted">PST (<%= @order.address.province.pst_rate %>%)</span>
               <span><%= number_to_currency(@order.pst_amount) %></span>
             </div>
           <% end %>
-          
           <% if @order.hst_amount > 0 %>
             <div class="d-flex justify-content-between mb-2">
               <span class="text-muted">HST (<%= @order.address.province.hst_rate %>%)</span>
               <span><%= number_to_currency(@order.hst_amount) %></span>
             </div>
           <% end %>
-          
           <hr>
-          
           <div class="d-flex justify-content-between mb-3">
             <strong>Grand Total</strong>
             <strong class="text-success fs-5"><%= number_to_currency(@order.grand_total) %></strong>
           </div>
-
           <!-- Order Info -->
           <hr>
           <div class="small text-muted">
@@ -141,11 +126,11 @@
               <span><%= @order.created_at.strftime("%b %d, %Y at %l:%M %p") %></span>
             </div>
             <% if @order.payment_at.present? %>
-  <div class="d-flex justify-content-between mb-1">
-    <span>Payment Date:</span>
-    <span><%= @order.payment_at.strftime("%b %d, %Y at %l:%M %p") %></span>
-  </div>
-<% end %>
+              <div class="d-flex justify-content-between mb-1">
+                <span>Payment Date:</span>
+                <span><%= @order.payment_at.strftime("%b %d, %Y at %l:%M %p") %></span>
+              </div>
+            <% end %>
             <% if @order.shipped_at.present? %>
               <div class="d-flex justify-content-between mb-1">
                 <span>Shipped:</span>
@@ -169,7 +154,6 @@
           </div>
         </div>
       </div>
-
       <!-- Back Button -->
       <div class="d-grid mt-3">
         <%= link_to "Back to Orders", customers_orders_path, class: "btn btn-outline-secondary" %>

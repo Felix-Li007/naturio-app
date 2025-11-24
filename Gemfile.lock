@@ -156,6 +156,8 @@ GEM
     drb (2.2.3)
     ed25519 (1.4.0)
     erb (6.0.0)
+    erb-formatter (0.7.3)
+      syntax_tree (~> 6.0)
     erubi (1.13.1)
     et-orbi (1.4.0)
       tzinfo
@@ -178,6 +180,7 @@ GEM
     has_scope (0.9.0)
       actionpack (>= 7.0)
       activesupport (>= 7.0)
+    htmlbeautifier (1.4.3)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -288,6 +291,7 @@ GEM
     popper_js (2.11.8)
     pp (0.6.3)
       prettyprint
+    prettier_print (1.2.1)
     prettyprint (0.2.0)
     prism (1.6.0)
     psych (5.2.6)
@@ -454,6 +458,8 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.8)
     stripe (10.15.0)
+    syntax_tree (6.3.0)
+      prettier_print (>= 1.2.0)
     thor (1.4.0)
     thruster (0.1.16)
     thruster (0.1.16-aarch64-linux)
@@ -508,7 +514,9 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   dotenv-rails (~> 2.8)
+  erb-formatter
   faker (~> 3.2)
+  htmlbeautifier
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
