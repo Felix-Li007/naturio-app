@@ -6,6 +6,6 @@ class CreateProductCategories < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :product_categories, [:product_id, :category_id], unique: true
+    add_index :product_categories, [ :product_id, :category_id ], unique: true
   end
 end

@@ -9,7 +9,7 @@ ActiveAdmin.register Category do
     id_column
     column :name
     column :description
-    column 'Products Count' do |category|
+    column "Products Count" do |category|
       category.products.count
     end
     column :created_at
@@ -20,7 +20,7 @@ ActiveAdmin.register Category do
   filter :created_at
 
   form do |f|
-    f.inputs 'Category Details' do
+    f.inputs "Category Details" do
       f.input :name
       f.input :description, as: :text
     end
@@ -32,14 +32,14 @@ ActiveAdmin.register Category do
       row :id
       row :name
       row :description
-      row 'Products' do |category|
-        category.products.map(&:name).join(', ')
+      row "Products" do |category|
+        category.products.map(&:name).join(", ")
       end
       row :created_at
       row :updated_at
     end
 
-    panel 'Products in this Category' do
+    panel "Products in this Category" do
       table_for category.products do
         column :id
         column :name

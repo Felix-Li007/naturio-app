@@ -66,20 +66,20 @@ puts "✓ #{Product.count} products imported with category associations"
 
 Page.find_or_create_by!(slug: 'about') do |p|
   p.title = 'About Us'
-  p.content = "<section id="about">
+  p.content = "<section id=\"about\">
   <h2>Welcome to Northern Harvest Natural Foods</h2>
   <p>
-    Northern Harvest Natural Foods has been proudly serving the Winnipeg community 
-    with premium organic and natural foods since 2009. Our mission is to make 
-    healthy, sustainable living accessible to everyone, while supporting local 
+    Northern Harvest Natural Foods has been proudly serving the Winnipeg community
+    with premium organic and natural foods since 2009. Our mission is to make
+    healthy, sustainable living accessible to everyone, while supporting local
     farmers and producers.
   </p>
 
   <h3>Our Story</h3>
   <p>
-    Founded by a group of health-conscious local entrepreneurs, Northern Harvest 
-    began as a small farmers market stall. Over the years, we have grown into a 
-    trusted brand with multiple retail locations and an online store, serving 
+    Founded by a group of health-conscious local entrepreneurs, Northern Harvest
+    began as a small farmers market stall. Over the years, we have grown into a
+    trusted brand with multiple retail locations and an online store, serving
     thousands of families across Manitoba.
   </p>
 
@@ -94,8 +94,8 @@ Page.find_or_create_by!(slug: 'about') do |p|
 
   <h3>Why Choose Us?</h3>
   <p>
-    At Northern Harvest, we are committed to creating a shopping experience that is 
-    friendly, educational, and sustainable. Our knowledgeable staff are always 
+    At Northern Harvest, we are committed to creating a shopping experience that is
+    friendly, educational, and sustainable. Our knowledgeable staff are always
     ready to help you find the best products for your lifestyle.
   </p>
 </section>
@@ -104,11 +104,11 @@ end
 
 Page.find_or_create_by!(slug: 'contact') do |p|
   p.title = 'Contact Us'
-  p.content = "<section id="contact">
+  p.content = "<section id=\"contact\">
   <h2>Get in Touch</h2>
   <p>
-    Thank you for visiting Northern Harvest Natural Foods!  
-    Whether you have questions about our natural products, need help with an order, 
+    Thank you for visiting Northern Harvest Natural Foods!
+    Whether you have questions about our natural products, need help with an order,
     or simply want to connect with our team, we're here to help.
   </p>
 
@@ -118,21 +118,21 @@ Page.find_or_create_by!(slug: 'contact') do |p|
     <strong>Downtown Winnipeg Store:</strong><br>
     218 Willow Creek Lane, Winnipeg, MB R3B 2Y7<br>
     Phone: (204) 555‑1324<br>
-    Email: <a href="mailto:downtown@northernharvest.ca">downtown@northernharvest.ca</a>
+    Email: <a href=\"mailto:downtown@northernharvest.ca\">downtown@northernharvest.ca</a>
   </p>
 
   <p>
     <strong>South Winnipeg Store:</strong><br>
     742 Maple Ridge Drive, Winnipeg, MB R3T 5K3<br>
     Phone: (204) 555‑4981<br>
-    Email: <a href="mailto:south@northernharvest.ca">south@northernharvest.ca</a>
+    Email: <a href=\"mailto:south@northernharvest.ca\">south@northernharvest.ca</a>
   </p>
 
   <p>
     <strong>West Winnipeg Store:</strong><br>
     91 Meadow Brook Trail, Winnipeg, MB R3Y 0A9<br>
     Phone: (204) 555‑2840<br>
-    Email: <a href="mailto:west@northernharvest.ca">west@northernharvest.ca</a>
+    Email: <a href=\"mailto:west@northernharvest.ca\">west@northernharvest.ca</a>
   </p>
 
   <h3>Hours of Operation</h3>
@@ -144,9 +144,9 @@ Page.find_or_create_by!(slug: 'contact') do |p|
 
   <h3>Email Us</h3>
   <p>
-    General Inquiries: <a href="mailto:info@northernharvest.ca">info@northernharvest.ca</a><br>
-    Customer Support: <a href="mailto:support@northernharvest.ca">support@northernharvest.ca</a><br>
-    Wholesale / Partners: <a href="mailto:partners@northernharvest.ca">partners@northernharvest.ca</a>
+    General Inquiries: <a href=\"mailto:info@northernharvest.ca\">info@northernharvest.ca</a><br>
+    Customer Support: <a href=\"mailto:support@northernharvest.ca\">support@northernharvest.ca</a><br>
+    Wholesale / Partners: <a href=\"mailto:partners@northernharvest.ca\">partners@northernharvest.ca</a>
   </p>
 </section>
 "

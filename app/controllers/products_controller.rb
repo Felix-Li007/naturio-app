@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show]
-  before_action :set_categories, only: [:index]
+  before_action :set_product, only: [ :show ]
+  before_action :set_categories, only: [ :index ]
 
   # GET /products (Feature 2.1, 2.2, 2.3， 2.4, 2.5，2.6)
   def index
@@ -14,18 +14,18 @@ class ProductsController < ApplicationController
 
     # Filter by type (Feature 2.4)
     case params[:filter]
-    when 'on_sale'
+    when "on_sale"
       @products = @products.on_sale
       @filter_title = "On Sale"
-    when 'new'
+    when "new"
       @products = @products.new_products
       @filter_title = "New Arrivals"
-    when 'recent'
+    when "recent"
       @products = @products.recently_updated
       @filter_title = "Recently Updated"
     end
 
-    # Feature 2.6 ✯ 
+    # Feature 2.6 ✯
     if params[:search].present?
       @search_term = params[:search].strip
       @products = @products.search_by_keyword(@search_term)
@@ -40,13 +40,13 @@ class ProductsController < ApplicationController
 
     # Sorting
     case params[:sort]
-    when 'price_asc'
+    when "price_asc"
       @products = @products.by_price_asc
-    when 'price_desc'
+    when "price_desc"
       @products = @products.by_price_desc
-    when 'name'
+    when "name"
       @products = @products.alphabetical
-    when 'newest'
+    when "newest"
       @products = @products.order(created_at: :desc)
     else
       @products = @products.order(created_at: :desc)
@@ -58,8 +58,8 @@ class ProductsController < ApplicationController
 
   # GET /products/:id (Feature 2.3)
   def show
-    @related_products = Product.includes(:categories).with_attached_image.joins(:product_categories).where(product_categories: { 
-                                 category_id: @product.category_ids 
+    @related_products = Product.includes(:categories).with_attached_image.joins(:product_categories).where(product_categories: {
+                                 category_id: @product.category_ids
                                }).where.not(id: @product.id).distinct.limit(4)
   end
 

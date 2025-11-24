@@ -2,8 +2,8 @@
 module Customers
   class AddressesController < ApplicationController
     before_action :authenticate_customer!
-    before_action :set_address, only: [:edit, :update, :destroy]
-    before_action :set_provinces, only: [:new, :create, :edit, :update]
+    before_action :set_address, only: [ :edit, :update, :destroy ]
+    before_action :set_provinces, only: [ :new, :create, :edit, :update ]
 
     def index
       @addresses = current_customer.addresses.includes(:province)
@@ -17,8 +17,8 @@ module Customers
       @address = current_customer.addresses.build(address_params)
 
       if @address.save
-        redirect_to customers_addresses_path, 
-                    notice: 'Address was successfully created.'
+        redirect_to customers_addresses_path,
+                    notice: "Address was successfully created."
       else
         render :new, status: :unprocessable_entity
       end
@@ -29,8 +29,8 @@ module Customers
 
     def update
       if @address.update(address_params)
-        redirect_to customers_addresses_path, 
-                    notice: 'Address was successfully updated.'
+        redirect_to customers_addresses_path,
+                    notice: "Address was successfully updated."
       else
         render :edit, status: :unprocessable_entity
       end
@@ -38,12 +38,12 @@ module Customers
 
     def destroy
       if @address.orders.any?
-        redirect_to customers_addresses_path, 
-                    alert: 'Cannot delete address with associated orders.'
+        redirect_to customers_addresses_path,
+                    alert: "Cannot delete address with associated orders."
       else
         @address.destroy
-        redirect_to customers_addresses_path, 
-                    notice: 'Address was successfully deleted.'
+        redirect_to customers_addresses_path,
+                    notice: "Address was successfully deleted."
       end
     end
 
@@ -59,10 +59,10 @@ module Customers
 
     def address_params
       params.require(:address).permit(
-        :street_address, 
-        :city, 
-        :province_id, 
-        :postal_code, 
+        :street_address,
+        :city,
+        :province_id,
+        :postal_code,
         :address_type
       )
     end

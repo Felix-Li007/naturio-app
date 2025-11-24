@@ -9,10 +9,10 @@ ActiveAdmin.register Customer do
     id_column
     column :email
     column :username
-    column 'Orders' do |customer|
+    column "Orders" do |customer|
       customer.orders.count
     end
-    column 'Total Spent' do |customer|
+    column "Total Spent" do |customer|
       number_to_currency(customer.orders.sum(:grand_total))
     end
     column :created_at
@@ -32,7 +32,7 @@ ActiveAdmin.register Customer do
       row :updated_at
     end
 
-    panel 'Addresses' do
+    panel "Addresses" do
       table_for customer.addresses do
         column :id
         column :address_type
@@ -46,7 +46,7 @@ ActiveAdmin.register Customer do
     end
 
     # Feature 3.2.1 - 显示顾客所有订单及详情
-    panel 'Order History' do
+    panel "Order History" do
       table_for customer.orders.recent do
         column :id do |order|
           link_to order.id, admin_order_path(order)
@@ -57,13 +57,13 @@ ActiveAdmin.register Customer do
         column :subtotal do |order|
           number_to_currency(order.subtotal)
         end
-        column 'GST' do |order|
+        column "GST" do |order|
           number_to_currency(order.gst_amount)
         end
-        column 'PST' do |order|
+        column "PST" do |order|
           number_to_currency(order.pst_amount)
         end
-        column 'HST' do |order|
+        column "HST" do |order|
           number_to_currency(order.hst_amount)
         end
         column :grand_total do |order|
@@ -75,7 +75,7 @@ ActiveAdmin.register Customer do
   end
 
   form do |f|
-    f.inputs 'Customer Details' do
+    f.inputs "Customer Details" do
       f.input :email
       f.input :username
       f.input :password

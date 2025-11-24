@@ -4,11 +4,11 @@ class OrderItem < ApplicationRecord
   belongs_to :product
 
   # Validations (Feature 4.2.1)
-  validates :quantity, presence: true, 
+  validates :quantity, presence: true,
                        numericality: { greater_than: 0, only_integer: true }
-  validates :purchase_price, presence: true, 
+  validates :purchase_price, presence: true,
                              numericality: { greater_than: 0 }
-  validates :subtotal, presence: true, 
+  validates :subtotal, presence: true,
                        numericality: { greater_than_or_equal_to: 0 }
 
   # Callbacks

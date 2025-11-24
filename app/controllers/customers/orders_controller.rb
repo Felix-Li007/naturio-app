@@ -2,7 +2,7 @@
 module Customers
   class OrdersController < ApplicationController
     before_action :authenticate_customer!
-    before_action :set_order, only: [:show]
+    before_action :set_order, only: [ :show ]
 
     def index
       @orders = current_customer.orders.includes(:order_items, :address).order(created_at: :desc).page(params[:page]).per(10)

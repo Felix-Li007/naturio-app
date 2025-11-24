@@ -2,7 +2,7 @@
 # app/admin/products.rb (Feature 1.2, 1.3)
 # ============================================
 ActiveAdmin.register Product do
-  permit_params :name, :description, :price, :stock_quantity, 
+  permit_params :name, :description, :price, :stock_quantity,
                 :on_sale, :is_new, :image, category_ids: []
 
   # 列表页面
@@ -17,7 +17,7 @@ ActiveAdmin.register Product do
     column :on_sale
     column :is_new
     column :categories do |product|
-      product.categories.map(&:name).join(', ')
+      product.categories.map(&:name).join(", ")
     end
     column :image do |product|
       if product.image.attached?
@@ -40,7 +40,7 @@ ActiveAdmin.register Product do
 
   # 表单 (Feature 4.2.5 - Many-to-Many 在 Admin 管理)
   form do |f|
-    f.inputs 'Product Details' do
+    f.inputs "Product Details" do
       f.input :name
       f.input :description, as: :text
       f.input :price
@@ -49,16 +49,16 @@ ActiveAdmin.register Product do
       f.input :is_new
     end
 
-    f.inputs 'Categories' do
-      f.input :categories, 
-              as: :check_boxes, 
+    f.inputs "Categories" do
+      f.input :categories,
+              as: :check_boxes,
               collection: Category.alphabetical
     end
 
-    f.inputs 'Product Image' do
+    f.inputs "Product Image" do
       f.input :image, as: :file
       if f.object.image.attached?
-        image_tag url_for(f.object.image), width:200
+        image_tag url_for(f.object.image), width: 200
       end
     end
 
@@ -78,7 +78,7 @@ ActiveAdmin.register Product do
       row :on_sale
       row :is_new
       row :categories do |product|
-        product.categories.map(&:name).join(', ')
+        product.categories.map(&:name).join(", ")
       end
       row :image do |product|
         if product.image.attached?
