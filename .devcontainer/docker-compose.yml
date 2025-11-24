@@ -34,7 +34,6 @@ services:
 
     depends_on:
       - web-postgres
-      - sonar-server
 
   web-postgres:
     image: postgres:15
@@ -48,34 +47,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: naturio_development
-
-  sonar-server:
-    image: sonarqube:community
-    container_name: sonarqube
-    restart: unless-stopped
-    networks:
-      - rails_network
-    ports:
-      - "9000:9000"
-    environment:
-      SONAR_JDBC_URL: jdbc:postgresql://sonar-postgres:5432/sonar
-      SONAR_JDBC_USERNAME: sonar
-      SONAR_JDBC_PASSWORD: sonar
-    depends_on:
-      - sonar-postgres
-
-  sonar-postgres:
-    image: postgres:15
-    container_name: sonar-postgres
-    restart: unless-stopped
-    networks:
-      - rails_network
-    environment:
-      POSTGRES_USER: sonar
-      POSTGRES_PASSWORD: sonar
-      POSTGRES_DB: sonar
-    volumes:
-      - sonar-db:/var/lib/postgresql
 
   stripe-cli:
     image: stripe/stripe-cli:latest
