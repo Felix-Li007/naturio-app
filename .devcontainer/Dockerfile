@@ -18,4 +18,40 @@ ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.git
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
+# --------------------------
+# Node.js & npm (Cypress dependency)
+# --------------------------
+RUN apt-get update && apt-get install -y curl
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get install -y nodejs
 
+# --------------------------
+# System libraries that Cypress depends on
+# --------------------------
+RUN apt-get update && apt-get install -y \
+    libgtk2.0-0 \
+    libgtk-3-0 \
+    libgbm1 \
+    libnotify-dev \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    xvfb \
+    fonts-liberation \
+    libappindicator3-1 \
+    xauth \
+    fluxbox \
+    x11vnc \
+    && rm -rf /var/lib/apt/lists/*
+
+# --------------------------
+# Install Cypress
+# --------------------------
+RUN npm install -g cypress
+
+RUN cypress install
+
+# --------------------------
+# Set up VNC port
+# --------------------------
+EXPOSE 5900

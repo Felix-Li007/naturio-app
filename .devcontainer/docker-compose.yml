@@ -5,17 +5,24 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-
     volumes:
       - ../..:/workspaces:cached
-
-    # Prevent container from exiting
-    command: sleep infinity
+    # Start a VNC server to view Cypress tests
+    command: >
+      sh -c "
+        Xvfb :99 -screen 0 1440x900x24 &
+        sleep 3
+        x11vnc -display :99 -nopw -forever &
+        sleep infinity
+      "
+    ports:
+      - "5901:5900" # VNC
 
     networks:
       - rails_network
     
     environment:
+      DISPLAY: ":99"
       DB_HOST: web-postgres
       DB_USERNAME: postgres
       DB_PASSWORD: password
@@ -77,6 +84,8 @@ services:
       - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
     stdin_open: true
     tty: true
+
+
 
 volumes:
   sonar-db:
