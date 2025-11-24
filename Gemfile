@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+gem "htmlbeautifier"
+gem "erb-formatter"
+
 # Front-end resources
 gem "sprockets-rails", "~> 3.5"
 gem "sprockets", "~> 4.2"
