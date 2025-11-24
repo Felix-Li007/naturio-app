@@ -90,9 +90,6 @@ class CheckoutsController < ApplicationController
 
       # 减少库存
       update_stock
-
-      # 清空购物车
-      session[:cart] = {}
       session.delete(:checkout_address_id)
     end
 
@@ -117,6 +114,7 @@ class CheckoutsController < ApplicationController
     end
 
     @order_items = @order.order_items.includes(:product)
+    session[:cart] = {}
     session.delete(:last_order_id)
   end
 
