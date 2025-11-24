@@ -17,8 +17,8 @@ class Product < ApplicationRecord
 
   # Scopes (Feature 2.4 - Filtering)
   scope :on_sale, -> { where(on_sale: true) }
-  scope :new_products, -> { where(is_new: true) }
-  scope :recently_updated, -> { where("products.updated_at >= ?", 7.days.ago) }
+  scope :new_products, -> { where("products.created_at >= ?", 3.days.ago) }
+  scope :recently_updated, -> { where("products.updated_at >= ?", 3.days.ago) }
   scope :in_stock, -> { where("stock_quantity > 0") }
   scope :alphabetical, -> { order(:name) }
   scope :by_price_asc, -> { order(:price) }
