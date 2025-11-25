@@ -5,32 +5,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-
-    volumes:
-      - ../..:/workspaces:cached
-
-    # Start a VNC server to view Cypress tests
-    # sleep infinity
-    command: >
-      sh -c "
-        Xvfb :99 -screen 0 1440x900x24 &
-        export DISPLAY=:99
-        sleep 3
-        x11vnc -display :99 -nopw -forever &
-        npx cypress open
-      "
-    ports:
-      - "5901:5900" # VNC
-
     networks:
       - rails_network
-    
+    ports:
+      - "80:3000"
+    env_file:
+      - .env
     environment:
       DB_HOST: web-postgres
       DB_USERNAME: postgres
       DB_PASSWORD: password
-      DB_NAME: naturio_development
-      RAILS_ENV: development
+      DB_NAME: naturio_production
+      RAILS_ENV: production
 
     depends_on:
       - web-postgres
@@ -42,20 +28,20 @@ services:
       - rails_network
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./create-db-user.sql:/docker-entrypoint-initdb.d/create-db-user.sql
+      - ./.devcontainer/create-db-user.sql:/docker-entrypoint-initdb.d/create-db-user.sql
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: naturio_development
+      POSTGRES_DB: naturio_production
 
   stripe-cli:
     image: stripe/stripe-cli:latest
     container_name: stripe-cli
     networks:
       - rails_network
-    command: ["listen", "--forward-to", "http://web-app:3000/webhooks/stripe"]
+    command: ["listen", "--forward-to", "http://web-app/webhooks/stripe"]
     environment:
-      - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
+      STRIPE_API_KEY: ${STRIPE_SECRET_KEY}
     stdin_open: true
     tty: true
 
