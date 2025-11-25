@@ -34,18 +34,17 @@ class Product < ApplicationRecord
 
   def small
     return unless image.attached?
-    image.variant(resize_to_limit: [100, 100]).processed
+    image.variant(resize_to_limit: [ 100, 100 ]).processed
   end
 
   def medium
     return unless image.attached?
-    image.variant(resize_to_limit: [300, 300]).processed
+    image.variant(resize_to_limit: [ 300, 300 ]).processed
   end
 
   def large
     return unless image.attached?
-    image.variant(resize_to_limit: [600, 600]).processed
-
+    image.variant(resize_to_limit: [ 600, 600 ]).processed
   end
 
   # Search (Feature 2.6)
