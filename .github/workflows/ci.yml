@@ -210,11 +210,8 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         with:
-          browser: chrome       # 可以指定 chrome 或 firefox
-          headless: true        # 也可以改成 false 看是否可视化
-          viewport-width: 1440
-          viewport-height: 900
-          spec: "test/cypress/**/*.cy.js"
+          browser: chrome 
+          config-file: test/cypress/cypress.config.js
         env:
           RAILS_ENV: test
           CYPRESS_baseUrl: http://localhost:3000
