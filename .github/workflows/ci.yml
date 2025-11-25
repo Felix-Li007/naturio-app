@@ -213,9 +213,8 @@ jobs:
           CYPRESS_baseUrl: http://localhost:3000
         run: |
           ruby bin/rails server -e test -p 3000 -b 0.0.0.0 -d
-
           npx wait-on http://localhost:3000
-
+          run: curl -I http://localhost:3000
           npx cypress run --config-file test/cypress/cypress.config.js
 
       - name: Save Cypress screenshots
