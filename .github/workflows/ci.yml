@@ -174,8 +174,16 @@ jobs:
       
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y \
-             libpq-dev libgtk-3-0 libgbm-dev libnss3 libasound2 xvfb
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev \
+            libgtk-3-0 \
+            libgbm1 \
+            libnotify-dev \
+            libnss3 \
+            libxss1 \
+            libasound2 \
+            xvfb \
+            fonts-liberation \
+            libappindicator3-1 \
 
       - name: Checkout code
         uses: actions/checkout@v5
