@@ -15,7 +15,7 @@
         <h1 class="display-5 mb-4"><%= @page.title %></h1>
         
         <div class="content">
-          <%= raw @page.content %>
+      <%= sanitize(Page.find_by!(slug: params[:slug]).content) %>
         </div>
       </article>
     </div>
