@@ -201,14 +201,12 @@ jobs:
         env:
           RAILS_ENV: test
         run: ruby bin/rails db:prepare
-
-      - name: Install Stripe CLI
-        run: curl -sSL https://stripe.com/install.sh | bash
-
-      - name: Start Stripe CLI
-        env:
-          STRIPE_API_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-        run: stripe listen --forward-to http://localhost:3000/webhooks/stripe &
+        
+      - name: Start Stripe CLI in Docker
+        run: |
+          docker run --rm -d \
+          -e STRIPE_API_KEY=${{ secrets.STRIPE_SECRET_KEY }} \
+          stripe/stripe-cli listen --forward-to http://host.docker.internal:3000/webhooks/stripe
 
       - name: Start Rails server & Run Cypress
         env:
