@@ -216,15 +216,18 @@ jobs:
           -e STRIPE_API_KEY=${{ secrets.STRIPE_SECRET_KEY }} \
           stripe/stripe-cli listen --forward-to http://host.docker.internal:3000/webhooks/stripe
 
-      - name: Start Rails server & Run Cypress
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome       # 可以指定 chrome 或 firefox
+          headless: true        # 也可以改成 false 看是否可视化
+          viewport-width: 1440
+          viewport-height: 900
+          spec: "test/cypress/**/*.cy.js"
         env:
           RAILS_ENV: test
           CYPRESS_baseUrl: http://localhost:3000
-        run: |
-          ruby bin/rails server -e test -p 3000 -b 0.0.0.0 -d
-          npx wait-on http://localhost:3000
-          curl -I http://localhost:3000
-          npx cypress run --config-file test/cypress/cypress.config.js
+
 
       - name: Save Cypress screenshots
         if: failure()
