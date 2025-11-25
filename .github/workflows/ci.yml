@@ -150,3 +150,88 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
+          
+  cypress-test:
+    runs-on: ubuntu-latest
+    needs: system-test  # 如果你希望 Cypress 依赖 Rails 测试完成，可以保留；不依赖则删除
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    steps:
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev
+
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: Install Cypress
+        run: npx cypress install
+
+      - name: Prepare Rails test database
+        env:
+          RAILS_ENV: test
+        run: ruby bin/rails db:prepare
+
+      - name: Install Stripe CLI
+        run: curl -sSL https://stripe.com/install.sh | bash
+
+      - name: Start Stripe CLI
+        env:
+          STRIPE_API_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+        run: stripe listen --forward-to http://localhost:3000/webhooks/stripe &
+
+      - name: Start Rails server & Run Cypress
+        env:
+          RAILS_ENV: test
+          CYPRESS_baseUrl: http://localhost:3000
+        run: |
+          # Rails server 后台运行
+          bin/rails server -e test -p 3000 -b -d
+
+          # 等待 Rails 启动完成
+          npx wait-on http://localhost:3000
+
+          # 运行 Cypress，指定自定义配置文件
+          npx cypress run --config-file test/cypress/cypress.config.js
+
+      - name: Save Cypress screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: test/cypress/screenshots/**/*
+          if-no-files-found: ignore
+
+      - name: Save Cypress videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: test/cypress/videos/**/*
+          if-no-files-found: ignore
+
