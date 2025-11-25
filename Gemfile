@@ -16,7 +16,6 @@ gem "activeadmin", "~> 3.0"
 gem "devise", "~> 4.9"
 
 # Image processing (Feature 1.3, 4.2.4, 5.2)
-gem "image_processing", "~> 1.2"
 gem "mini_magick", "~> 4.12"
 
 # cloud storage (Feature 5.3)

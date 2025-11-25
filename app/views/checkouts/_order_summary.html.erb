@@ -13,7 +13,7 @@
         <div class="d-flex">
           <div class="me-2 position-relative" style="width: 50px;">
             <% if item[:product].image.attached? %>
-              <%= image_tag url_for(item[:product].image),width:50, 
+              <%= image_tag url_for(item[:product].small),width:50, 
                   class: "rounded" %>
             <% else %>
               <div class="bg-light rounded d-flex align-items-center justify-content-center" 

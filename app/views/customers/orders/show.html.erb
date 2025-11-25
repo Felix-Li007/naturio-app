@@ -52,7 +52,7 @@
               <!-- Product Image -->
               <div class="me-3" style="width: 60px;">
                 <% if item.product.image.attached? %>
-                  <%= image_tag url_for(item.product.image),width:60, 
+                  <%= image_tag url_for(item.product.small),width:60, 
                       class: "rounded", alt: item.product.name %>
                 <% else %>
                   <div class="bg-light rounded d-flex align-items-center justify-content-center" 

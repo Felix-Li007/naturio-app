@@ -22,7 +22,7 @@ ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.git
 # --------------------------
 # Node.js & npm (Cypress dependency)
 # --------------------------
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl & 
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
@@ -43,6 +43,8 @@ RUN apt-get update && apt-get install -y \
     xauth \
     fluxbox \
     x11vnc \
+    imagemagick \
+    libmagickwand-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # --------------------------

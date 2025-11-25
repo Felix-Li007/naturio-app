@@ -41,7 +41,7 @@
                       <div class="d-flex align-items-center">
                         <div class="me-3" style="width: 60px;">
                           <% if item[:product].image.attached? %>
-                            <%= image_tag url_for(item[:product].image),width:60, 
+                            <%= image_tag url_for(item[:product].small),width:60, 
                                 class: "rounded" %>
                           <% end %>
                         </div>

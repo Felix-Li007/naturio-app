@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  before_save :set_is_new
   # Active Storage (Feature 5.2)
   has_one_attached :image
   has_many_attached :images  # Multi-image support
@@ -23,6 +24,29 @@ class Product < ApplicationRecord
   scope :alphabetical, -> { order(:name) }
   scope :by_price_asc, -> { order(:price) }
   scope :by_price_desc, -> { order(price: :desc) }
+
+
+  def set_is_new
+    if created_at.nil? || created_at >= 3.days.ago
+      self.is_new = true
+    end
+  end
+
+  def small
+    return unless image.attached?
+    image.variant(resize_to_limit: [100, 100]).processed
+  end
+
+  def medium
+    return unless image.attached?
+    image.variant(resize_to_limit: [300, 300]).processed
+  end
+
+  def large
+    return unless image.attached?
+    image.variant(resize_to_limit: [600, 600]).processed
+
+  end
 
   # Search (Feature 2.6)
   scope :search_by_keyword, ->(keyword) {

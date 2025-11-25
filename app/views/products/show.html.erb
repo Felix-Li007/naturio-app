@@ -17,7 +17,7 @@
       <div class="card border-0 shadow-sm">
         <div class="position-relative">
           <% if @product.image.attached? %>
-            <%= image_tag url_for(@product.image),width:600,
+            <%= image_tag url_for(@product.large),width:600,
                 class: "card-img-top", 
                 alt: @product.name,
                 id: "mainImage",
@@ -46,7 +46,7 @@
         <div class="d-flex gap-2 mt-3">
           <% @product.images.each_with_index do |image, index| %>
             <div class="thumbnail-item" style="cursor: pointer;">
-              <%= image_tag image.variant(resize_to_limit: [100, 100]), 
+              <%= image_tag url_for(image),width:100, 
                   class: "rounded border #{'border-success border-2' if index == 0}",
                   style: "width: 80px; height: 80px; object-fit: cover;" %>
             </div>

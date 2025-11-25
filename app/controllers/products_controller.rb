@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
       @filter_title = "On Sale"
     when "new"
       @products = @products.new_products
-      @products.update_all(is_new: true)
+      
       @filter_title = "New Arrivals"
     when "recent"
       @products = @products.recently_updated
