@@ -30,8 +30,6 @@ describe('Authentication - Sign Up and Login', () => {
             cy.visit('/register')
         })
         it('The username already exists should display an error (Unhappy Path)', () => {
-            cy.visit('/register')
-
             // Use an existing username
             cy.get('input[id*="username"]').type('testuser')
             cy.get('input[type="email"]').type(`test_${Date.now()}@example.com`)
