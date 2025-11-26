@@ -26,19 +26,31 @@ describe('Authentication - Sign Up and Login', () => {
     })
 
     describe('Sign Up - Unhappy Paths', () => {
+        var uniqueUsername, testEmail, testPassword
         beforeEach(() => {
+            cy.visit('/register')
+            uniqueUsername = `testuser_${Date.now()}`
+            testEmail = `test_${Date.now()}@example.com`
+            testPassword = 'TestPassword123!'
+            cy.get('input[id*="username"]').type(uniqueUsername)
+            cy.get('input[type="email"]').type(testEmail)
+            cy.get('input[id*="password"]').first().type(testPassword)
+            cy.get('input[id*="password_confirmation"]').type(testPassword)
+
+            cy.get('input[value="Create Account"][type="submit"]').click()
             cy.visit('/register')
         })
         it('The username already exists should display an error (Unhappy Path)', () => {
             // Use an existing username
-            cy.get('input[id*="username"]').type('testuser')
+            cy.get('input[id*="username"]').type(uniqueUsername)
             cy.get('input[type="email"]').type(`test_${Date.now()}@example.com`)
             cy.get('input[id*="password"]').first().type('Password123!')
             cy.get('input[id*="password_confirmation"]').type('Password123!')
             cy.get('input[value="Create Account"][type="submit"]').click()
 
             // An error message should be displayed
-            cy.get('div[class="alert alert-danger"]').and('contain', 'taken')
+            cy.contains('div.alert.alert-danger', 'taken', { timeout: 10000 })
+                .should('be.visible').and('contain', 'taken')
             cy.get('input[id*="username"]').should('have.class', 'is-invalid')
         })
 
@@ -55,7 +67,7 @@ describe('Authentication - Sign Up and Login', () => {
         it('The email address is already in use and an error (Unhappy Path) should be displayed.', () => {
             // Use an existing email
             cy.get('input[id*="username"]').type(`newuser_${Date.now()}`)
-            cy.get('input[type="email"]').type('fli5@academic.rrc.ca')
+            cy.get('input[type="email"]').type(testEmail)
             cy.get('input[id*="password"]').first().type('Password123!')
             cy.get('input[id*="password_confirmation"]').type('Password123!')
 
