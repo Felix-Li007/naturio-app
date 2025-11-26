@@ -207,6 +207,13 @@ jobs:
           -e STRIPE_API_KEY=${{ secrets.STRIPE_SECRET_KEY }} \
           stripe/stripe-cli listen --forward-to http://host.docker.internal:3000/webhooks/stripe
 
+      - name: Start Rails server
+        env:
+          RAILS_ENV: test
+        run: |
+          ruby bin/rails server -e test -p 3000 -b 0.0.0.0 -d
+          run: curl -I http://localhost:3000
+          
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         with:
@@ -215,7 +222,6 @@ jobs:
         env:
           RAILS_ENV: test
           CYPRESS_baseUrl: http://localhost:3000
-
 
       - name: Save Cypress screenshots
         if: failure()
