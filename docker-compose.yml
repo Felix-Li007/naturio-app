@@ -2,9 +2,10 @@ version: '3'
 
 services:
   web-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/fli5/naturio-app:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     networks:
       - rails_network
     ports:
@@ -46,7 +47,6 @@ services:
     tty: true
 
 volumes:
-  sonar-db:
   postgres-data:
 
 networks:
