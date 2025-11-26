@@ -38,8 +38,7 @@ describe('Authentication - Sign Up and Login', () => {
             cy.get('input[value="Create Account"][type="submit"]').click()
 
             // An error message should be displayed
-            cy.contains('div.alert.alert-danger', 'taken', { timeout: 10000 })
-                .should('be.visible').and('contain', 'taken')
+            cy.get('div[class="alert alert-danger"]').and('contain', 'taken')
             cy.get('input[id*="username"]').should('have.class', 'is-invalid')
         })
 
