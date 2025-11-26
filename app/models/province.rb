@@ -9,9 +9,9 @@ class Province < ApplicationRecord
   validates :code, presence: true,
                    uniqueness: true,
                    length: { is: 2 }
-  validates :gst_rate, numericality: { greater_than_or_equal_to: 0, less_than: 100 }
-  validates :pst_rate, numericality: { greater_than_or_equal_to: 0, less_than: 100 }
-  validates :hst_rate, numericality: { greater_than_or_equal_to: 0, less_than: 100 }
+  validates :gst_rate, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  validates :pst_rate, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  validates :hst_rate, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
   # Methods
   def total_tax_rate
