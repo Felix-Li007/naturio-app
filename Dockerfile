@@ -56,8 +56,9 @@ COPY . .
 # -j 1 disable parallel compilation to avoid a QEMU bug: https://github.com/rails/bootsnap/issues/495
 RUN bundle exec bootsnap precompile -j 1 app/ lib/
 
-# Make sure bin/rails is executable
-RUN chmod +x bin/rails
+# Add executable permissions to files in the bin directory
+RUN chmod +x bin/*
+
 
 # 然后再预编译 assets
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
