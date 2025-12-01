@@ -16,7 +16,7 @@ gem "activeadmin", "~> 3.0"
 gem "devise", "~> 4.9"
 
 # Image processing (Feature 1.3, 4.2.4, 5.2)
-gem "mini_magick", "~> 4.12"
+gem "mini_magick", "~> 5.3"
 
 # cloud storage (Feature 5.3)
 gem "aws-sdk-s3", require: false
