@@ -89,7 +89,7 @@ group :development, :test do
 
   # 测试数据生成 (Feature 1.6)
 
-  gem "rspec-rails", "~> 6.0"
+  gem "rspec-rails", "~> 8.0"
 end
 
 group :development do
