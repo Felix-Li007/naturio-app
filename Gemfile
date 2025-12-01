@@ -29,7 +29,7 @@ gem "kaminari", "~> 1.2"
 gem "stripe", "~> 10.0"
 
 # Environment variable management
-gem "dotenv-rails", "~> 2.8"
+gem "dotenv-rails", "~> 3.1"
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
