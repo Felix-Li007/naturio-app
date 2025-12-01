@@ -97,7 +97,7 @@ group :development do
   gem "web-console"
 
   gem "rubocop", "~> 1.57", require: false          # (Feature 5.4)
-  gem "rubocop-rails", "~> 2.22", require: false
+  gem "rubocop-rails", "~> 2.34", require: false
   gem "rubocop-performance", "~> 1.19", require: false
 end
 
