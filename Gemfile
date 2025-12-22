@@ -26,7 +26,7 @@ gem "aws-sdk-s3", require: false
 gem "kaminari", "~> 1.2"
 
 # pay (Feature 3.3.1)
-gem "stripe", "~> 10.0"
+gem "stripe", "~> 18.1"
 
 # Environment variable management
 gem "dotenv-rails", "~> 2.8"
