@@ -144,7 +144,7 @@ jobs:
         run: ruby bin/rails db:test:prepare test:system
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: screenshots
@@ -224,7 +224,7 @@ jobs:
 
       - name: Save Cypress screenshots
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cypress-screenshots
           path: test/cypress/screenshots/**/*
@@ -232,7 +232,7 @@ jobs:
 
       - name: Save Cypress videos
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cypress-videos
           path: test/cypress/videos/**/*
